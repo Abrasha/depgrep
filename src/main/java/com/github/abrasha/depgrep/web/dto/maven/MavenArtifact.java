@@ -105,25 +105,20 @@ public class MavenArtifact {
     public void setEc(List<String> ec) {
         this.ec = ec;
     }
+    
+    @Override
+    public String toString() {
+        return "MavenArtifact{" +
+                "id='" + id + '\'' +
+                ", groupId='" + groupId + '\'' +
+                ", artifactId='" + artifactId + '\'' +
+                ", latestVersion='" + latestVersion + '\'' +
+                ", repositoryId='" + repositoryId + '\'' +
+                ", p='" + p + '\'' +
+                ", timestamp=" + timestamp +
+                ", versionCount=" + versionCount +
+                ", text=" + text +
+                ", ec=" + ec +
+                '}';
+    }
 }
-
-
-/*
-
-"id": "com.google.cloud.trace:guice",
-"groupId": "com.google.cloud.trace",
-"artifactId": "guice",
-"latestVersion": "0.3.1",
-"repositoryId": "central",
-"p": "pom",
-"timestamp": 1486150968000,
-"versionCount": 7,
-"text": [
-"com.google.cloud.trace",
-"guice",
-".pom"
-],
-"ec": [
-".pom"
-]
- */

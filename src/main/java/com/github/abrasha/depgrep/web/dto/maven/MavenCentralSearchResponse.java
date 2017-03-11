@@ -24,4 +24,11 @@ public class MavenCentralSearchResponse {
         this.response = response;
     }
     
+    @Override
+    public String toString() {
+        return "MavenCentralSearchResponse{" +
+                "responseHeader=" + responseHeader +
+                ", response=" + response +
+                '}';
+    }
 }

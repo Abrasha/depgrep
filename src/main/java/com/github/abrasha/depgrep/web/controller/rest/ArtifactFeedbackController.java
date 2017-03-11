@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author Andrii Abramov on 3/11/17.
  */
-@RestController("/")
+@RestController("/approve")
 public class ArtifactFeedbackController {
     
     private static final Logger log = LoggerFactory.getLogger(ArtifactFeedbackController.class);
@@ -28,8 +28,9 @@ public class ArtifactFeedbackController {
         this.modelMapper = modelMapper;
     }
     
-    @PostMapping("/approve")
+    @PostMapping
     public Artifact approveArtifact(@RequestBody ApproveDto approveDto) {
+        log.debug("approveArtifact: {}", approveDto);
         return artifactService.approveQuery(approveDto.getQuery(), approveDto.getArtifact());
     }
     

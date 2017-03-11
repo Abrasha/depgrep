@@ -3,7 +3,7 @@ package com.github.abrasha.depgrep.web.request;
 /**
  * @author Andrii Abramov on 3/11/17.
  */
-public class FindByArtifactSpecification implements ArtifactSpecification {
+public class FindByArtifactSpecification extends AbstractArtifactSpecification {
     
     private String artifact;
     

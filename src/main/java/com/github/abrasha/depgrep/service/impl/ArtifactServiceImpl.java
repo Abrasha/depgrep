@@ -35,6 +35,10 @@ public class ArtifactServiceImpl implements ArtifactService {
     public Artifact approveQuery(String query, Artifact artifact) {
         Feedback feedback = feedbackRepository.findOneByQueryAndArtifactArtifactId(query, artifact.getArtifactId());
         
+        if (artifact.getId() == null){
+            artifact = artifactRepository.save(artifact);
+        }
+        
         if (feedback == null) {
             feedback = createNewFeedback(query, artifact);
         }

@@ -42,4 +42,14 @@ public class ArtifactDto {
     public void setLikes(Integer likes) {
         this.likes = likes;
     }
+    
+    @Override
+    public String toString() {
+        return "ArtifactDto{" +
+                "groupId='" + groupId + '\'' +
+                ", artifactId='" + artifactId + '\'' +
+                ", version='" + version + '\'' +
+                ", likes=" + likes +
+                '}';
+    }
 }

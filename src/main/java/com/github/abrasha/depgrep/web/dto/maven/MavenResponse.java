@@ -41,4 +41,13 @@ public class MavenResponse {
     public void setArtifacts(List<MavenArtifact> artifacts) {
         this.artifacts = artifacts;
     }
+    
+    @Override
+    public String toString() {
+        return "MavenResponse{" +
+                "numberFound=" + numberFound +
+                ", offset=" + offset +
+                ", artifacts=" + artifacts +
+                '}';
+    }
 }
