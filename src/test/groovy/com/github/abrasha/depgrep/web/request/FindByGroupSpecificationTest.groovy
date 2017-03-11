@@ -18,10 +18,10 @@ class FindByGroupSpecificationTest extends Specification {
 
         where:
         groupId   || expected
-        'guice'   || 'a:"guice"'
-        'asd.asd' || 'a:"asd.asd"'
-        'qwe:qwe' || 'a:"qwe:qwe"'
-        'asd-asd' || 'a:"asd-asd"'
+        'guice'   || 'g:"guice"'
+        'asd.asd' || 'g:"asd.asd"'
+        'qwe:qwe' || 'g:"qwe:qwe"'
+        'asd-asd' || 'g:"asd-asd"'
 
     }
 

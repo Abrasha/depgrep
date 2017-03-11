@@ -3,10 +3,7 @@ package com.github.abrasha.depgrep.service;
 import com.github.abrasha.depgrep.core.model.Artifact;
 import com.github.abrasha.depgrep.web.dto.maven.MavenArtifact;
 import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
-import com.github.abrasha.depgrep.web.request.ArtifactSpecification;
-import com.github.abrasha.depgrep.web.request.FindByArtifactSpecification;
-import com.github.abrasha.depgrep.web.request.FindByGroupSpecification;
-import com.github.abrasha.depgrep.web.request.FindByQuerySpecification;
+import com.github.abrasha.depgrep.web.request.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +43,14 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
         return executeRequest(new FindByQuerySpecification(query));
     }
     
+    @Override
+    public List<Artifact> findByGroupAndArtifact(String group, String artifact) {
+        return executeRequest(new FindByGroupAndArtifactSpecification(group, artifact));
+    }
+    
     private List<Artifact> executeRequest(ArtifactSpecification specification) {
         MavenCentralSearchResponse response = mavenCentral.query(specification);
-        List<Artifact> result = response.getMavenResponse().getArtifacts()
+        List<Artifact> result = response.getResponse().getArtifacts()
                 .stream()
                 .map(this::parseResponse)
                 .collect(Collectors.toList());
@@ -58,8 +60,8 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     
     private Artifact parseResponse(MavenArtifact mavenArtifact) {
         Artifact artifact = new Artifact();
-        artifact.setArtifactId(mavenArtifact.getArtifactId());
-        artifact.setGroupId(mavenArtifact.getGroupId());
+        artifact.setArtifact(mavenArtifact.getArtifactId());
+        artifact.setGroup(mavenArtifact.getGroupId());
         artifact.setVersion(mavenArtifact.getLatestVersion());
         artifact.setLikes(123);
         return artifact;

@@ -111,20 +111,21 @@ public class MavenSearchParams {
     public void setDefType(String defType) {
         this.defType = defType;
     }
+    
+    @Override
+    public String toString() {
+        return "MavenSearchParams{" +
+                "spellCheck='" + spellCheck + '\'' +
+                ", fl='" + fl + '\'' +
+                ", sort='" + sort + '\'' +
+                ", indent='" + indent + '\'' +
+                ", q='" + q + '\'' +
+                ", qf='" + qf + '\'' +
+                ", spellCheckCount='" + spellCheckCount + '\'' +
+                ", wt='" + wt + '\'' +
+                ", rows='" + rows + '\'' +
+                ", version='" + version + '\'' +
+                ", defType='" + defType + '\'' +
+                '}';
+    }
 }
-
-/*
-
-"spellCheck": "true",
-"fl": "id,groupId,artifactId,latestVersion,p,ec,repositoryId,text,timestamp,versionCount",
-"sort": "score desc,timestamp desc,groupId asc,artifactId asc",
-"indent": "off",
-"q": "guice",
-"qf": "text^20 groupId^5 artifactId^10",
-"spellCheck.count": "5",
-"wt": "json",
-"rows": "20",
-"version": "2.2",
-"defType": "dismax"
-
- */

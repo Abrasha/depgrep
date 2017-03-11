@@ -38,4 +38,13 @@ public class MavenResponseHeader {
     public void setMavenSearchParams(MavenSearchParams mavenSearchParams) {
         this.mavenSearchParams = mavenSearchParams;
     }
+    
+    @Override
+    public String toString() {
+        return "MavenResponseHeader{" +
+                "status=" + status +
+                ", queryTime=" + queryTime +
+                ", mavenSearchParams=" + mavenSearchParams +
+                '}';
+    }
 }
