@@ -3,12 +3,15 @@ package com.github.abrasha.depgrep.persistence;
 import com.github.abrasha.depgrep.core.model.Feedback;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Andrii Abramov on 3/11/17.
  */
 @Repository
 public interface FeedbackRepository extends EntityRepository<Feedback> {
     
-    Feedback findOneByQueryAndArtifactArtifactId(String query, String ArtifactId);
+    List<Feedback> findByArtifactId(String artifactId);
+    Feedback findOneByArtifactIdAndQuery(String artifactId, String query);
     
 }

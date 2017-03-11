@@ -1,8 +1,6 @@
 package com.github.abrasha.depgrep.service.impl;
 
-import com.github.abrasha.depgrep.core.model.Artifact;
 import com.github.abrasha.depgrep.core.model.Feedback;
-import com.github.abrasha.depgrep.persistence.ArtifactRepository;
 import com.github.abrasha.depgrep.persistence.FeedbackRepository;
 import com.github.abrasha.depgrep.service.ArtifactService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,42 +13,32 @@ import org.springframework.stereotype.Service;
 public class ArtifactServiceImpl implements ArtifactService {
     
     private final FeedbackRepository feedbackRepository;
-    private final ArtifactRepository artifactRepository;
     
     @Autowired
-    public ArtifactServiceImpl(ArtifactRepository artifactRepository, FeedbackRepository feedbackRepository) {
-        this.artifactRepository = artifactRepository;
+    public ArtifactServiceImpl(FeedbackRepository feedbackRepository) {
         this.feedbackRepository = feedbackRepository;
     }
     
-    public Feedback createNewFeedback(String query, Artifact artifact) {
+    public Feedback createNewFeedback(String query, String artifactId) {
         Feedback feedback = new Feedback();
         feedback.setTimesApproved(0);
         feedback.setQuery(query);
-        feedback.setArtifact(artifact);
+        feedback.setArtifactId(artifactId);
         return feedback;
     }
     
     @Override
-    public Artifact approveQuery(String query, Artifact artifact) {
-        Feedback feedback = feedbackRepository.findOneByQueryAndArtifactArtifactId(query, artifact.getArtifactId());
-        
-        if (artifact.getId() == null){
-            artifact = artifactRepository.save(artifact);
-        }
+    public Feedback approveQuery(String query, String artifactId) {
+        Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(artifactId, query);
         
         if (feedback == null) {
-            feedback = createNewFeedback(query, artifact);
+            feedback = createNewFeedback(query, artifactId);
         }
         
         feedback.setTimesApproved(feedback.getTimesApproved() + 1);
         feedbackRepository.save(feedback);
         
-        Artifact result = artifactRepository.findOne(artifact.getId());
-        
-        result.setLikes(result.getLikes() + 1);
-        
-        return artifactRepository.save(artifact);
+        return feedback;
     }
     
 }

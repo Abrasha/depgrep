@@ -60,8 +60,8 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     
     private Artifact parseResponse(MavenArtifact mavenArtifact) {
         Artifact artifact = new Artifact();
-        artifact.setArtifactId(mavenArtifact.getArtifactId());
-        artifact.setGroupId(mavenArtifact.getGroupId());
+        artifact.setArtifact(mavenArtifact.getArtifactId());
+        artifact.setGroup(mavenArtifact.getGroupId());
         artifact.setVersion(mavenArtifact.getLatestVersion());
         artifact.setLikes(123);
         return artifact;

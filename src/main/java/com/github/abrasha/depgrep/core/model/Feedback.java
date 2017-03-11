@@ -1,7 +1,6 @@
 package com.github.abrasha.depgrep.core.model;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 /**
  * @author Andrii Abramov on 3/11/17.
@@ -11,9 +10,7 @@ public class Feedback extends BaseEntity {
     
     private String query;
     private Integer timesApproved;
-    
-    @ManyToOne
-    private Artifact artifact;
+    private String artifactId;
     
     public String getQuery() {
         return query;
@@ -23,12 +20,12 @@ public class Feedback extends BaseEntity {
         this.query = query;
     }
     
-    public Artifact getArtifact() {
-        return artifact;
+    public String getArtifactId() {
+        return artifactId;
     }
     
-    public void setArtifact(Artifact artifact) {
-        this.artifact = artifact;
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId;
     }
     
     public Integer getTimesApproved() {
@@ -44,7 +41,7 @@ public class Feedback extends BaseEntity {
         return "Feedback{" +
                 "query='" + query + '\'' +
                 ", timesApproved=" + timesApproved +
-                ", artifact=" + artifact +
+                ", artifact=" + artifactId +
                 "} " + super.toString();
     }
 }

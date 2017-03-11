@@ -8,26 +8,27 @@ import javax.persistence.Entity;
 @Entity
 public class Artifact extends BaseEntity {
     
-    private String groupId;
-    private String artifactId;
+    private String group;
+    private String artifact;
+    
     private String version;
     
     private Integer likes;
     
-    public String getGroupId() {
-        return groupId;
+    public String getGroup() {
+        return group;
     }
     
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setGroup(String group) {
+        this.group = group;
     }
     
-    public String getArtifactId() {
-        return artifactId;
+    public String getArtifact() {
+        return artifact;
     }
     
-    public void setArtifactId(String artifactId) {
-        this.artifactId = artifactId;
+    public void setArtifact(String artifact) {
+        this.artifact = artifact;
     }
     
     public String getVersion() {
@@ -46,11 +47,15 @@ public class Artifact extends BaseEntity {
         this.likes = likes;
     }
     
+    public String getArtifactId() {
+        return group + ":" + artifact;
+    }
+    
     @Override
     public String toString() {
         return "Artifact{" +
-                "groupId='" + groupId + '\'' +
-                ", artifactId='" + artifactId + '\'' +
+                "group='" + group + '\'' +
+                ", artifact='" + artifact + '\'' +
                 ", version='" + version + '\'' +
                 ", likes=" + likes +
                 "} " + super.toString();
