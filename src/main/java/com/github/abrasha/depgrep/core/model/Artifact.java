@@ -1,8 +1,11 @@
 package com.github.abrasha.depgrep.core.model;
 
+import javax.persistence.Entity;
+
 /**
  * @author Andrii Abramov on 3/11/17.
  */
+@Entity
 public class Artifact extends BaseEntity {
     
     private String groupId;

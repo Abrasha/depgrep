@@ -40,7 +40,7 @@ public class MavenCentral {
     
     private String getQueryUrl(ArtifactSpecification specification) {
         String url = baseUrl + "&q=" + specification.getQuery();
-        LOGGER.info("constructed ur: {}", url);
+        LOGGER.info("constructed url: {}", url);
         return url;
     }
     

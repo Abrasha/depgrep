@@ -3,10 +3,7 @@ package com.github.abrasha.depgrep.service;
 import com.github.abrasha.depgrep.core.model.Artifact;
 import com.github.abrasha.depgrep.web.dto.maven.MavenArtifact;
 import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
-import com.github.abrasha.depgrep.web.request.ArtifactSpecification;
-import com.github.abrasha.depgrep.web.request.FindByArtifactSpecification;
-import com.github.abrasha.depgrep.web.request.FindByGroupSpecification;
-import com.github.abrasha.depgrep.web.request.FindByQuerySpecification;
+import com.github.abrasha.depgrep.web.request.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +41,11 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     @Override
     public List<Artifact> findByQuery(String query) {
         return executeRequest(new FindByQuerySpecification(query));
+    }
+    
+    @Override
+    public List<Artifact> findByGroupAndArtifact(String group, String artifact) {
+        return executeRequest(new FindByGroupAndArtifactSpecification(group, artifact));
     }
     
     private List<Artifact> executeRequest(ArtifactSpecification specification) {
