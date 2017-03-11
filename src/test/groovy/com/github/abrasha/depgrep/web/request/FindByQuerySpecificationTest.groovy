@@ -11,15 +11,15 @@ class FindByQuerySpecificationTest extends Specification {
     @Unroll
     def "test creating composite specification"() {
         when:
-        def spec = new FindByGroupAndArtifactSpecification(group, artifact)
+        def spec = new FindByQuerySpecification(query)
         then:
         spec.query == expected
         where:
-        group   | artifact  || expected
-        'group' | 'guice'   || 'g:"group"+AND+a:"guice"'
-        'group' | 'asd.asd' || 'g:"group"+AND+a:"asd.asd"'
-        'group' | 'qwe:qwe' || 'g:"group"+AND+a:"qwe:qwe"'
-        'group' | 'asd-asd' || 'g:"group"+AND+a:"asd-asd"'
+        query     || expected
+        '123'     || '123'
+        'qwe-qwe' || 'qwe-qwe'
+        'qwe.qwe' || 'qwe.qwe'
+        'qwe+qwe' || 'qwe+qwe'
 
     }
 
