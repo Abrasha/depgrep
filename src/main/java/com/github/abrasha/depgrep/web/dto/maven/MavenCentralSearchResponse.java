@@ -8,19 +8,20 @@ public class MavenCentralSearchResponse {
     private MavenResponseHeader responseHeader;
     private MavenResponse response;
     
-    public MavenResponseHeader getMavenResponseHeader() {
+    public MavenResponseHeader getResponseHeader() {
         return responseHeader;
     }
     
-    public void setMavenResponseHeader(MavenResponseHeader responseHeader) {
+    public void setResponseHeader(MavenResponseHeader responseHeader) {
         this.responseHeader = responseHeader;
     }
     
-    public MavenResponse getMavenResponse() {
+    public MavenResponse getResponse() {
         return response;
     }
     
-    public void setMavenResponse(MavenResponse mavenResponse) {
-        this.response = mavenResponse;
+    public void setResponse(MavenResponse response) {
+        this.response = response;
     }
+    
 }

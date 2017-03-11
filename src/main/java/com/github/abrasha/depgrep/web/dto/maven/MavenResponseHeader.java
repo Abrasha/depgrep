@@ -38,4 +38,6 @@ public class MavenResponseHeader {
     public void setMavenSearchParams(MavenSearchParams mavenSearchParams) {
         this.mavenSearchParams = mavenSearchParams;
     }
+    
+    
 }

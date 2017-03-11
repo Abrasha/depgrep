@@ -19,6 +19,7 @@ public class MavenArtifact {
     
     private String latestVersion;
     private String repositoryId;
+    
     private String p;
     private Long timestamp;
     private Integer versionCount;
