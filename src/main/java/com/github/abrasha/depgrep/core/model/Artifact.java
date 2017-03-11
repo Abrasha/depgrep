@@ -45,4 +45,14 @@ public class Artifact extends BaseEntity {
     public void setLikes(Integer likes) {
         this.likes = likes;
     }
+    
+    @Override
+    public String toString() {
+        return "Artifact{" +
+                "groupId='" + groupId + '\'' +
+                ", artifactId='" + artifactId + '\'' +
+                ", version='" + version + '\'' +
+                ", likes=" + likes +
+                "} " + super.toString();
+    }
 }

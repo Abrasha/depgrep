@@ -3,6 +3,7 @@ package com.github.abrasha.depgrep.web.controller.rest;
 import com.github.abrasha.depgrep.core.model.Artifact;
 import com.github.abrasha.depgrep.service.ArtifactProvider;
 import com.github.abrasha.depgrep.web.dto.SearchRequest;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,12 @@ public class SearchController {
     private static final Logger log = LoggerFactory.getLogger(SearchController.class);
     
     private final ArtifactProvider<Artifact> artifactArtifactProvider;
+    private final ModelMapper modelMapper;
     
     @Autowired
-    public SearchController(ArtifactProvider<Artifact> artifactArtifactProvider) {
+    public SearchController(ArtifactProvider<Artifact> artifactArtifactProvider, ModelMapper modelMapper) {
         this.artifactArtifactProvider = artifactArtifactProvider;
+        this.modelMapper = modelMapper;
     }
     
     @GetMapping(params = "group")
