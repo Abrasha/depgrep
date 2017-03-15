@@ -19,7 +19,7 @@ public class ArtifactServiceImpl implements ArtifactService {
         this.feedbackRepository = feedbackRepository;
     }
     
-    public Feedback createNewFeedback(String query, String artifactId) {
+    private Feedback createNewFeedback(String query, String artifactId) {
         Feedback feedback = new Feedback();
         feedback.setTimesApproved(0);
         feedback.setQuery(query);

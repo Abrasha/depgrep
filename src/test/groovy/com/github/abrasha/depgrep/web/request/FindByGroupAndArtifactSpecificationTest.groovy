@@ -1,5 +1,6 @@
 package com.github.abrasha.depgrep.web.request
 
+import com.github.abrasha.depgrep.service.specification.FindByGroupAndArtifactSpecification
 import spock.lang.Specification
 import spock.lang.Unroll
 

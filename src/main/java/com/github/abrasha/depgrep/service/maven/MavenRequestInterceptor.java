@@ -1,4 +1,4 @@
-package com.github.abrasha.depgrep.service;
+package com.github.abrasha.depgrep.service.maven;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

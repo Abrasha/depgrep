@@ -1,9 +1,10 @@
-package com.github.abrasha.depgrep.service;
+package com.github.abrasha.depgrep.service.maven;
 
 import com.github.abrasha.depgrep.core.model.Artifact;
+import com.github.abrasha.depgrep.service.ArtifactProvider;
+import com.github.abrasha.depgrep.service.specification.*;
 import com.github.abrasha.depgrep.web.dto.maven.MavenArtifact;
 import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
-import com.github.abrasha.depgrep.web.request.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +51,11 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     
     private List<Artifact> executeRequest(ArtifactSpecification specification) {
         MavenCentralSearchResponse response = mavenCentral.query(specification);
-        List<Artifact> result = response.getResponse().getArtifacts()
+    
+        return response.getResponse().getArtifacts()
                 .stream()
                 .map(this::parseResponse)
                 .collect(Collectors.toList());
-        
-        return result;
     }
     
     private Artifact parseResponse(MavenArtifact mavenArtifact) {
