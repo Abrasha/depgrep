@@ -1,7 +1,7 @@
-package com.github.abrasha.depgrep.service;
+package com.github.abrasha.depgrep.service.maven;
 
 import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
-import com.github.abrasha.depgrep.web.request.ArtifactSpecification;
+import com.github.abrasha.depgrep.service.specification.ArtifactSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

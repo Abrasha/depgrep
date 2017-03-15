@@ -1,4 +1,6 @@
-package com.github.abrasha.depgrep.web.request;
+package com.github.abrasha.depgrep.service.specification;
+
+import com.github.abrasha.depgrep.web.request.AbstractArtifactSpecification;
 
 /**
  * @author Andrii Abramov on 3/11/17.
