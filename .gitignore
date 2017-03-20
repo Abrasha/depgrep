@@ -4,6 +4,7 @@
 node_modules
 bower_components
 server/build
+server/out
 
 .fuse_hidden*
 .directory

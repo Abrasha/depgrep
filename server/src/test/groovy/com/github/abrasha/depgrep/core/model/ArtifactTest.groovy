@@ -17,13 +17,13 @@ class ArtifactTest extends Specification {
         then: "should match artifact id"
         a.artifactId == expected
         where:
-        group         | artifact      | expected
-        'g'           | 'a'           | 'g:a'
-        'com-example' | 'a'           | 'com-example:a'
-        'random'      | 'a'           | 'random:a'
-        'com_example' | 'a'           | 'com_example:a'
-        'g'           | 'com_example' | 'g:com_example'
-        'g'           | 'com-example' | 'g:com-example'
-        'g'           | 'a'           | 'g:a'
+        group         | artifact      || expected
+        'g'           | 'a'           || 'g:a'
+        'com-example' | 'a'           || 'com-example:a'
+        'random'      | 'a'           || 'random:a'
+        'com_example' | 'a'           || 'com_example:a'
+        'g'           | 'com_example' || 'g:com_example'
+        'g'           | 'com-example' || 'g:com-example'
+        'g'           | 'a'           || 'g:a'
     }
 }

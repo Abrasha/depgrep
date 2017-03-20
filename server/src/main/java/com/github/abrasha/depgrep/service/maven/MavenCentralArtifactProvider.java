@@ -1,7 +1,9 @@
 package com.github.abrasha.depgrep.service.maven;
 
 import com.github.abrasha.depgrep.core.model.Artifact;
+import com.github.abrasha.depgrep.core.model.Feedback;
 import com.github.abrasha.depgrep.service.ArtifactProvider;
+import com.github.abrasha.depgrep.service.FeedbackService;
 import com.github.abrasha.depgrep.service.specification.*;
 import com.github.abrasha.depgrep.web.dto.maven.MavenArtifact;
 import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
@@ -19,13 +21,15 @@ import java.util.stream.Collectors;
 @Service
 public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> {
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(MavenCentralArtifactProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MavenCentralArtifactProvider.class);
     
     private final MavenCentral mavenCentral;
+    private final FeedbackService feedbackService;
     
     @Autowired
-    public MavenCentralArtifactProvider(MavenCentral mavenCentral) {
+    public MavenCentralArtifactProvider(MavenCentral mavenCentral, FeedbackService feedbackService) {
         this.mavenCentral = mavenCentral;
+        this.feedbackService = feedbackService;
     }
     
     
@@ -54,16 +58,33 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
         
         return response.getResponse().getArtifacts()
                 .stream()
-                .map(this::parseResponse)
+                .map(artifact -> parseResponse(artifact, specification.getQuery()))
                 .collect(Collectors.toList());
     }
     
-    private Artifact parseResponse(MavenArtifact mavenArtifact) {
+    private Artifact parseResponse(MavenArtifact mavenArtifact, String query) {
         Artifact artifact = new Artifact();
         artifact.setArtifact(mavenArtifact.getArtifactId());
         artifact.setGroup(mavenArtifact.getGroupId());
         artifact.setVersion(mavenArtifact.getLatestVersion());
-        artifact.setLikes(123);
+        
+        String artifactId = artifact.getArtifactId();
+        Feedback feedback = feedbackService.findByArtifactId(artifactId);
+        LOG.debug("found feedback for artifact id = {}: {}", feedback);
+        
+        if (feedback == null) {
+            feedback = new Feedback();
+            feedback.setArtifactId(artifactId);
+            // initial likes count
+            feedback.setTimesApproved(0);
+            feedback.setQuery(query);
+            Feedback saved = feedbackService.save(feedback);
+            LOG.debug("Saved new feedback: {}", saved);
+        } else {
+            artifact.setLikes(feedback.getTimesApproved());
+        }
+        
+        
         return artifact;
     }
     

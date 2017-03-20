@@ -8,8 +8,8 @@ import lombok.Data;
 @Data
 public class ArtifactDto {
     
-    private String groupId;
-    private String artifactId;
+    private String group;
+    private String artifact;
     private String version;
     
     private Integer likes;
