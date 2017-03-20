@@ -2,8 +2,8 @@ package com.github.abrasha.depgrep.web.controller.rest;
 
 import com.github.abrasha.depgrep.core.model.Artifact;
 import com.github.abrasha.depgrep.service.ArtifactProvider;
+import com.github.abrasha.depgrep.web.dto.ArtifactDto;
 import com.github.abrasha.depgrep.web.dto.SearchRequest;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,41 +18,52 @@ import java.util.List;
  * @author Andrii Abramov on 3/11/17.
  */
 @RestController("/")
-public class SearchController {
+public class SearchController extends AbstractRestController<Artifact, ArtifactDto> {
     
-    private static final Logger log = LoggerFactory.getLogger(SearchController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SearchController.class);
     
     private final ArtifactProvider<Artifact> artifactArtifactProvider;
-    private final ModelMapper modelMapper;
     
     @Autowired
-    public SearchController(ArtifactProvider<Artifact> artifactArtifactProvider, ModelMapper modelMapper) {
+    public SearchController(ArtifactProvider<Artifact> artifactArtifactProvider) {
         this.artifactArtifactProvider = artifactArtifactProvider;
-        this.modelMapper = modelMapper;
     }
     
     @GetMapping(params = "group")
-    public List<Artifact> findByGroup(@RequestParam("group") String group) {
-        log.debug("searching with group = {}", group);
-        return artifactArtifactProvider.findByGroupName(group);
+    public List<ArtifactDto> findByGroup(@RequestParam("group") String group) {
+        LOG.debug("searching with group = {}", group);
+        List<Artifact> result = artifactArtifactProvider.findByGroupName(group);
+        return convertToDto(result);
     }
     
     @GetMapping(params = "artifact")
-    public List<Artifact> findByArtifact(@RequestParam("artifact") String artifact) {
-        log.debug("searching with artifact = {}", artifact);
-        return artifactArtifactProvider.findByArtifactName(artifact);
+    public List<ArtifactDto> findByArtifact(@RequestParam("artifact") String artifact) {
+        LOG.debug("searching with artifact = {}", artifact);
+        List<Artifact> result = artifactArtifactProvider.findByArtifactName(artifact);
+        return convertToDto(result);
     }
     
     @GetMapping(params = {"artifact", "group"})
-    public List<Artifact> findByArtifactAndGroup(@ModelAttribute SearchRequest request) {
-        log.debug("searching with artifact = {} and group = {}", request.getArtifact(), request.getGroup());
-        return artifactArtifactProvider.findByGroupAndArtifact(request.getGroup(), request.getArtifact());
+    public List<ArtifactDto> findByArtifactAndGroup(@ModelAttribute SearchRequest request) {
+        LOG.debug("searching with artifact = {} and group = {}", request.getArtifact(), request.getGroup());
+        List<Artifact> result = artifactArtifactProvider.findByGroupAndArtifact(request.getGroup(), request.getArtifact());
+        return convertToDto(result);
     }
     
     @GetMapping(params = "q")
-    public List<Artifact> findByQuery(@RequestParam("q") String q) {
-        log.debug("searching with query = {}", q);
-        return artifactArtifactProvider.findByQuery(q);
+    public List<ArtifactDto> findByQuery(@RequestParam("q") String q) {
+        LOG.debug("searching with query = {}", q);
+        List<Artifact> result = artifactArtifactProvider.findByQuery(q);
+        return convertToDto(result);
     }
     
+    @Override
+    protected Class<Artifact> getEntityClass() {
+        return Artifact.class;
+    }
+    
+    @Override
+    protected Class<ArtifactDto> getDtoClass() {
+        return ArtifactDto.class;
+    }
 }

@@ -1,5 +1,7 @@
 package com.github.abrasha.depgrep.core.model;
 
+import lombok.Data;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -8,17 +10,10 @@ import javax.persistence.MappedSuperclass;
  * @author Andrii Abramov on 3/11/17.
  */
 @MappedSuperclass
+@Data
 public abstract class BaseEntity {
     
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
     
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

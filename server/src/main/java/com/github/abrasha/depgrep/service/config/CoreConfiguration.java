@@ -1,4 +1,4 @@
-package com.github.abrasha.depgrep.service.configuration;
+package com.github.abrasha.depgrep.service.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

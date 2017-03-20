@@ -1,4 +1,4 @@
-package com.github.abrasha.depgrep.service.configuration;
+package com.github.abrasha.depgrep.web.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -10,4 +10,5 @@ public class ApproveDto {
     
     private String query;
     private String artifactId;
+    
 }
