@@ -11,10 +11,13 @@ class FindByQuerySpecificationTest extends Specification {
 
     @Unroll
     def "test creating composite specification"() {
+
         when:
         def spec = new FindByQuerySpecification(query)
+
         then:
         spec.query == expected
+
         where:
         query     || expected
         '123'     || '123'

@@ -11,6 +11,7 @@ class FindByGroupSpecificationTest extends Specification {
 
     @Unroll
     def "test creating group specification"() {
+
         when:
         def spec = new FindByGroupSpecification(groupId)
 
@@ -19,10 +20,10 @@ class FindByGroupSpecificationTest extends Specification {
 
         where:
         groupId   || expected
-        'guice'   || 'g:"guice"'
-        'asd.asd' || 'g:"asd.asd"'
-        'qwe:qwe' || 'g:"qwe:qwe"'
-        'asd-asd' || 'g:"asd-asd"'
+        'guice'   || 'g:guice'
+        'asd.asd' || 'g:asd.asd'
+        'qwe:qwe' || 'g:qwe:qwe'
+        'asd-asd' || 'g:asd-asd'
 
     }
 

@@ -7,9 +7,14 @@ import com.github.abrasha.depgrep.web.dto.SearchRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Andrii Abramov on 3/11/17.
@@ -51,7 +56,11 @@ public class SearchController extends AbstractRestController<Artifact, ArtifactD
     public List<ArtifactDto> findByQuery(@RequestParam("q") String q) {
         LOG.debug("searching with query = {}", q);
         List<Artifact> result = artifactArtifactProvider.findByQuery(q);
-        return convertToDto(result);
+        
+        return convertToDto(result)
+                .stream()
+                .sorted(Comparator.comparingInt(ArtifactDto::getLikes))
+                .collect(Collectors.toList());
     }
     
     @Override

@@ -3,6 +3,7 @@ package com.github.abrasha.depgrep.service.maven;
 import com.github.abrasha.depgrep.core.model.Artifact;
 import com.github.abrasha.depgrep.core.model.Feedback;
 import com.github.abrasha.depgrep.service.ArtifactProvider;
+import com.github.abrasha.depgrep.service.FeedbackResolver;
 import com.github.abrasha.depgrep.service.FeedbackService;
 import com.github.abrasha.depgrep.service.specification.*;
 import com.github.abrasha.depgrep.web.dto.maven.MavenArtifact;
@@ -25,11 +26,14 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     
     private final MavenCentral mavenCentral;
     private final FeedbackService feedbackService;
+    private FeedbackResolver feedbackResolver;
     
     @Autowired
-    public MavenCentralArtifactProvider(MavenCentral mavenCentral, FeedbackService feedbackService) {
+    public MavenCentralArtifactProvider(MavenCentral mavenCentral, FeedbackService feedbackService,
+                                        FeedbackResolver feedbackResolver) {
         this.mavenCentral = mavenCentral;
         this.feedbackService = feedbackService;
+        this.feedbackResolver = feedbackResolver;
     }
     
     
@@ -69,20 +73,11 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
         artifact.setVersion(mavenArtifact.getLatestVersion());
         
         String artifactId = artifact.getArtifactId();
-        Feedback feedback = feedbackService.findByArtifactId(artifactId);
+        Feedback feedback = feedbackResolver.getFeedbackForArtifact(artifactId, query);
+        
         LOG.debug("found feedback for artifact id = {}: {}", feedback);
         
-        if (feedback == null) {
-            feedback = new Feedback();
-            feedback.setArtifactId(artifactId);
-            // initial likes count
-            feedback.setTimesApproved(0);
-            feedback.setQuery(query);
-            Feedback saved = feedbackService.save(feedback);
-            LOG.debug("Saved new feedback: {}", saved);
-        } else {
-            artifact.setLikes(feedback.getTimesApproved());
-        }
+        artifact.setLikes(feedback.getTimesApproved());
         
         
         return artifact;

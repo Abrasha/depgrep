@@ -11,16 +11,19 @@ class FindByArtifactSpecificationTest extends Specification {
 
     @Unroll
     def "test creating artifact specification"() {
+
         when:
         def spec = new FindByArtifactSpecification(artifact)
+
         then:
         spec.query == expected
+
         where:
         artifact  || expected
-        'guice'   || 'a:"guice"'
-        'asd.asd' || 'a:"asd.asd"'
-        'qwe:qwe' || 'a:"qwe:qwe"'
-        'asd-asd' || 'a:"asd-asd"'
+        'guice'   || 'a:guice'
+        'asd.asd' || 'a:asd.asd'
+        'qwe_qwe' || 'a:qwe_qwe'
+        'asd-asd' || 'a:asd-asd'
 
     }
 }

@@ -15,6 +15,6 @@ public class FindByGroupSpecification extends AbstractArtifactSpecification {
     
     @Override
     public String getQuery() {
-        return "g:\"" + groupId + "\"";
+        return "g:" + groupId;
     }
 }

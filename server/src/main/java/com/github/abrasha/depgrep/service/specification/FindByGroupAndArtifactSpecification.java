@@ -17,6 +17,6 @@ public class FindByGroupAndArtifactSpecification extends AbstractArtifactSpecifi
     
     @Override
     public String getQuery() {
-        return "g:\"" + group + "\"+AND+a:\"" + artifact + "\"";
+        return "g:" + group + "+AND+a:" + artifact;
     }
 }

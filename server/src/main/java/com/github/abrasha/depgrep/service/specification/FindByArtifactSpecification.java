@@ -15,6 +15,6 @@ public class FindByArtifactSpecification extends AbstractArtifactSpecification {
     
     @Override
     public String getQuery() {
-        return "a:\"" + artifact + "\"";
+        return "a:" + artifact;
     }
 }

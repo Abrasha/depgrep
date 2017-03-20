@@ -9,14 +9,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+
 /**
  * @author Andrii Abramov on 3/11/17.
  */
 @Component
 public class MavenCentralImpl implements MavenCentral {
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(MavenCentral.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MavenCentral.class);
     private final RestTemplate restTemplate;
+    
     @Value("${search.maven.baseurl}")
     private String baseUrl;
     
@@ -28,19 +31,20 @@ public class MavenCentralImpl implements MavenCentral {
     @Override
     public MavenCentralSearchResponse query(ArtifactSpecification specification) {
         
-        String url = getQueryUrl(specification);
+        URI uri = getQueryUri(specification);
         
-        MavenCentralSearchResponse searchResponse = restTemplate.getForEntity(url, MavenCentralSearchResponse.class).getBody();
+        MavenCentralSearchResponse searchResponse = restTemplate.getForEntity(uri, MavenCentralSearchResponse.class).getBody();
         
-        LOGGER.info("got response: {}", searchResponse);
+        LOG.info("got response: {}", searchResponse);
         
         return searchResponse;
     }
     
-    private String getQueryUrl(ArtifactSpecification specification) {
+    private URI getQueryUri(ArtifactSpecification specification) {
         String url = baseUrl + "&q=" + specification.getQuery();
-        LOGGER.info("constructed url: {}", url);
-        return url;
+        LOG.info("constructed url: {}", url);
+        
+        return URI.create(url);
     }
     
     
