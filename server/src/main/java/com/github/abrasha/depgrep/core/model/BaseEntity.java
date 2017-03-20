@@ -13,7 +13,8 @@ import javax.persistence.MappedSuperclass;
 @Data
 public abstract class BaseEntity {
     
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     
 }

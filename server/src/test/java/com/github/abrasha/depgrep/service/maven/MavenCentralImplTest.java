@@ -25,9 +25,6 @@ public class MavenCentralImplTest extends AbstractApplicationTest {
     @Autowired
     private MavenCentral mavenCentral;
     
-    @Autowired
-    private RestTemplate restTemplate;
-    
     @Test
     public void searchByArtifact() throws Exception {
         ArtifactSpecification specification = new FindByArtifactSpecification(VALID_ARTIFACT);
@@ -57,8 +54,8 @@ public class MavenCentralImplTest extends AbstractApplicationTest {
         assertThat(response, is(notNullValue()));
         assertThat(response.getResponse(), is(notNullValue()));
         assertThat(response.getResponseHeader(), is(notNullValue()));
-        
-        assertThat(response.getResponse().getArtifacts(), hasSize(greaterThan(0)));
+    
+        assertThat(response.getResponse().getArtifacts(), is(not(empty())));
     }
     
 }

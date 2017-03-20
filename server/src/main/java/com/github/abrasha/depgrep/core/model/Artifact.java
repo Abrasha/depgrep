@@ -20,7 +20,7 @@ public class Artifact extends BaseEntity {
     
     private Integer likes;
     
-    public String getArtifactId(){
+    public String getArtifactId() {
         return group + ":" + artifact;
     }
     
