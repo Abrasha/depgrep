@@ -51,7 +51,7 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     
     private List<Artifact> executeRequest(ArtifactSpecification specification) {
         MavenCentralSearchResponse response = mavenCentral.query(specification);
-    
+        
         return response.getResponse().getArtifacts()
                 .stream()
                 .map(this::parseResponse)

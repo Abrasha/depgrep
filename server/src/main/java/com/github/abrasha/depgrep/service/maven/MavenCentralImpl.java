@@ -1,7 +1,7 @@
 package com.github.abrasha.depgrep.service.maven;
 
-import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
 import com.github.abrasha.depgrep.service.specification.ArtifactSpecification;
+import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,9 @@ import org.springframework.web.client.RestTemplate;
 public class MavenCentralImpl implements MavenCentral {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(MavenCentral.class);
-    
+    private final RestTemplate restTemplate;
     @Value("${search.maven.baseurl}")
     private String baseUrl;
-    
-    private final RestTemplate restTemplate;
     
     @Autowired
     public MavenCentralImpl(RestTemplate restTemplate) {
