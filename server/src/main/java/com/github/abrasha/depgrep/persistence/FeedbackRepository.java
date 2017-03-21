@@ -17,4 +17,6 @@ public interface FeedbackRepository extends EntityRepository<Feedback> {
     
     Feedback findOneByArtifactIdAndQuery(String artifactId, String query);
     
+    @Override
+    List<Feedback> findAll();
 }

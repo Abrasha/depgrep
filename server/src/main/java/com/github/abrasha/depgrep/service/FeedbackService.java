@@ -10,4 +10,5 @@ public interface FeedbackService {
     Feedback findByArtifactId(String artifactId);
     
     Feedback save(Feedback feedback);
+    
 }
