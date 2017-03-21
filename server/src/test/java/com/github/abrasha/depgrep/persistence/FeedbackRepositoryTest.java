@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Andrii Abramov on 3/21/17.
@@ -49,37 +49,38 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     @Test
     public void findOneByArtifactId() throws Exception {
         Feedback feedbacks = feedbackRepository.findOneByArtifactId(VALID_ARTIFACT_ID);
-        assertNotNull(feedbacks);
-        assertNotNull(feedbacks.getId());
-        assertEquals(feedbacks.getArtifactId(), VALID_ARTIFACT_ID);
+        assertThat(feedbacks, is(not(nullValue())));
+        assertThat(feedbacks.getId(), is(not(nullValue())));
+        assertThat(feedbacks.getArtifactId(), is(VALID_ARTIFACT_ID));
     }
     
     @Test
     public void findOneByArtifactIdDoesNotExist() throws Exception {
         Feedback feedbacks = feedbackRepository.findOneByArtifactId(INVALID_VALUE);
-        assertNull(feedbacks);
+        assertThat(feedbacks, is(nullValue()));
     }
     
     @Test
     public void findOneByArtifactIdAndQuery() throws Exception {
         Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(VALID_ARTIFACT_ID, VALID_QUERY);
-        assertNotNull(feedback);
-        assertNotNull(feedback.getId());
-        assertEquals(feedback.getArtifactId(), VALID_ARTIFACT_ID);
-        assertEquals(feedback.getQuery(), VALID_QUERY);
-        assertEquals(feedback.getTimesApproved(), TIMES_APPROVED);
+        assertThat(feedback, is(not(nullValue())));
+        assertThat(feedback.getId(), is(not(nullValue())));
+        
+        assertThat(feedback.getArtifactId(), is(VALID_ARTIFACT_ID));
+        assertThat(feedback.getQuery(), is(VALID_QUERY));
+        assertThat(feedback.getTimesApproved(), is(TIMES_APPROVED));
     }
     
     @Test
     public void findOneByArtifactIdAndQueryNoSuchQuery() throws Exception {
         Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(VALID_ARTIFACT_ID, INVALID_VALUE);
-        assertNull(feedback);
+        assertThat(feedback, is(nullValue()));
     }
     
     @Test
     public void findOneByArtifactIdAndQueryNoSuchArtifactId() throws Exception {
         Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(INVALID_VALUE, VALID_QUERY);
-        assertNull(feedback);
+        assertThat(feedback, is(nullValue()));
     }
     
 }
