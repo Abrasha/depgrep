@@ -11,4 +11,6 @@ public interface FeedbackService {
     
     Feedback save(Feedback feedback);
     
+    Feedback approveQuery(String query, String artifactId);
+    
 }

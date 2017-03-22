@@ -15,5 +15,6 @@ public interface ArtifactProvider<T extends Artifact> {
     
     List<T> findByQuery(String query);
     
-    List<Artifact> findByGroupAndArtifact(String group, String artifact);
+    List<T> findByGroupAndArtifact(String group, String artifact);
+    
 }

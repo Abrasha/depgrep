@@ -4,7 +4,6 @@ import com.github.abrasha.depgrep.core.model.Artifact;
 import com.github.abrasha.depgrep.core.model.Feedback;
 import com.github.abrasha.depgrep.service.ArtifactProvider;
 import com.github.abrasha.depgrep.service.FeedbackResolver;
-import com.github.abrasha.depgrep.service.FeedbackService;
 import com.github.abrasha.depgrep.service.specification.*;
 import com.github.abrasha.depgrep.web.dto.maven.MavenArtifact;
 import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
@@ -25,14 +24,11 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     private static final Logger LOG = LoggerFactory.getLogger(MavenCentralArtifactProvider.class);
     
     private final MavenCentral mavenCentral;
-    private final FeedbackService feedbackService;
     private FeedbackResolver feedbackResolver;
     
     @Autowired
-    public MavenCentralArtifactProvider(MavenCentral mavenCentral, FeedbackService feedbackService,
-                                        FeedbackResolver feedbackResolver) {
+    public MavenCentralArtifactProvider(MavenCentral mavenCentral, FeedbackResolver feedbackResolver) {
         this.mavenCentral = mavenCentral;
-        this.feedbackService = feedbackService;
         this.feedbackResolver = feedbackResolver;
     }
     

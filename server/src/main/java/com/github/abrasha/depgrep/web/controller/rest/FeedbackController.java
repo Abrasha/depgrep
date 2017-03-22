@@ -1,6 +1,6 @@
 package com.github.abrasha.depgrep.web.controller.rest;
 
-import com.github.abrasha.depgrep.service.ArtifactService;
+import com.github.abrasha.depgrep.service.FeedbackService;
 import com.github.abrasha.depgrep.web.dto.ApproveDto;
 import com.github.abrasha.depgrep.web.dto.FeedbackDto;
 import org.modelmapper.ModelMapper;
@@ -19,12 +19,12 @@ public class FeedbackController {
     
     private static final Logger LOG = LoggerFactory.getLogger(FeedbackController.class);
     
-    private final ArtifactService artifactService;
+    private final FeedbackService feedbackService;
     private final ModelMapper modelMapper;
     
     @Autowired
-    public FeedbackController(ArtifactService artifactService, ModelMapper modelMapper) {
-        this.artifactService = artifactService;
+    public FeedbackController(FeedbackService feedbackService, ModelMapper modelMapper) {
+        this.feedbackService = feedbackService;
         this.modelMapper = modelMapper;
     }
     
@@ -32,7 +32,7 @@ public class FeedbackController {
     public FeedbackDto approveArtifact(@RequestBody ApproveDto approveDto) {
         LOG.debug("approveArtifact: {}", approveDto);
         return modelMapper.map(
-                artifactService.approveQuery(approveDto.getQuery(), approveDto.getArtifactId()),
+                feedbackService.approveQuery(approveDto.getQuery(), approveDto.getArtifactId()),
                 FeedbackDto.class
         );
     }

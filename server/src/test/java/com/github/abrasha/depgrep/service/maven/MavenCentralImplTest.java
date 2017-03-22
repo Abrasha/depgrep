@@ -1,6 +1,7 @@
 package com.github.abrasha.depgrep.service.maven;
 
 import com.github.abrasha.depgrep.AbstractApplicationTest;
+import com.github.abrasha.depgrep.core.model.ArtifactGenerator;
 import com.github.abrasha.depgrep.service.specification.ArtifactSpecification;
 import com.github.abrasha.depgrep.service.specification.FindByArtifactSpecification;
 import com.github.abrasha.depgrep.service.specification.FindByGroupAndArtifactSpecification;
@@ -19,8 +20,8 @@ import static org.junit.Assert.assertThat;
  */
 public class MavenCentralImplTest extends AbstractApplicationTest {
     
-    private static final String VALID_ARTIFACT = "guice";
-    private static final String VALID_GROUP = "com.google.inject";
+    private static final String VALID_ARTIFACT = ArtifactGenerator.Valid.ARTIFACT_NAME;
+    private static final String VALID_GROUP = ArtifactGenerator.Valid.GROUP;
     
     @Autowired
     private MavenCentral mavenCentral;

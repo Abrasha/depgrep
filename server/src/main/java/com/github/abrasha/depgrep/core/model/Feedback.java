@@ -19,7 +19,7 @@ public class Feedback extends BaseEntity {
     private String query;
     private Integer timesApproved;
     
-    @Column(unique = true)
+    @Column
     private String artifactId;
     
 }

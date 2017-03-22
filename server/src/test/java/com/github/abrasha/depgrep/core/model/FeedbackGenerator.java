@@ -1,8 +1,11 @@
 package com.github.abrasha.depgrep.core.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author Andrii Abramov on 3/21/17.
  */
+@Component
 public class FeedbackGenerator {
     
     public static class Valid {
@@ -17,7 +20,7 @@ public class FeedbackGenerator {
         public static final Integer TIMES_APPROVED = -1;
     }
     
-    public static Feedback getValidFeedback() {
+    public Feedback getValidFeedback() {
         Feedback feedback = new Feedback();
         feedback.setQuery(Valid.QUERY);
         feedback.setId(1L);
@@ -26,7 +29,7 @@ public class FeedbackGenerator {
         return feedback;
     }
     
-    public static Feedback getInvalidFeedback() {
+    public Feedback getInvalidFeedback() {
         Feedback feedback = new Feedback();
         feedback.setQuery(Invalid.QUERY);
         feedback.setArtifactId(Invalid.ARTIFACT_ID);

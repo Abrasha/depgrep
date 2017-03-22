@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
@@ -18,14 +17,14 @@ import java.net.URI;
 public class MavenCentralImpl implements MavenCentral {
     
     private static final Logger LOG = LoggerFactory.getLogger(MavenCentral.class);
-    private final RestTemplate restTemplate;
+    private final MavenCentralExecutor centralExecutor;
     
     @Value("${search.maven.baseurl}")
     private String baseUrl;
     
     @Autowired
-    public MavenCentralImpl(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public MavenCentralImpl(MavenCentralExecutor centralExecutor) {
+        this.centralExecutor = centralExecutor;
     }
     
     @Override
@@ -33,7 +32,7 @@ public class MavenCentralImpl implements MavenCentral {
         
         URI uri = getQueryUri(specification);
         
-        MavenCentralSearchResponse searchResponse = restTemplate.getForEntity(uri, MavenCentralSearchResponse.class).getBody();
+        MavenCentralSearchResponse searchResponse = centralExecutor.executeRequest(uri);
         
         LOG.info("got response: {}", searchResponse);
         

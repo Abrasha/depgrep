@@ -1,7 +1,7 @@
 package com.github.abrasha.depgrep.web.controller.rest;
 
 import com.github.abrasha.depgrep.core.model.Artifact;
-import com.github.abrasha.depgrep.service.ArtifactProvider;
+import com.github.abrasha.depgrep.service.ArtifactService;
 import com.github.abrasha.depgrep.web.dto.ArtifactDto;
 import com.github.abrasha.depgrep.web.dto.SearchRequest;
 import org.slf4j.Logger;
@@ -24,38 +24,38 @@ public class SearchController extends AbstractRestController<Artifact, ArtifactD
     
     private static final Logger LOG = LoggerFactory.getLogger(SearchController.class);
     
-    private final ArtifactProvider<Artifact> artifactArtifactProvider;
+    private final ArtifactService artifactService;
     
     @Autowired
-    public SearchController(ArtifactProvider<Artifact> artifactArtifactProvider) {
-        this.artifactArtifactProvider = artifactArtifactProvider;
+    public SearchController(ArtifactService artifactService) {
+        this.artifactService = artifactService;
     }
     
     @GetMapping(params = "group")
     public List<ArtifactDto> findByGroup(@RequestParam("group") String group) {
         LOG.debug("searching with group = {}", group);
-        List<Artifact> result = artifactArtifactProvider.findByGroupName(group);
+        List<Artifact> result = artifactService.findByGroupName(group);
         return convertToDto(result);
     }
     
     @GetMapping(params = "artifact")
     public List<ArtifactDto> findByArtifact(@RequestParam("artifact") String artifact) {
         LOG.debug("searching with artifact = {}", artifact);
-        List<Artifact> result = artifactArtifactProvider.findByArtifactName(artifact);
+        List<Artifact> result = artifactService.findByArtifactName(artifact);
         return convertToDto(result);
     }
     
     @GetMapping(params = {"artifact", "group"})
     public List<ArtifactDto> findByArtifactAndGroup(@ModelAttribute SearchRequest request) {
         LOG.debug("searching with artifact = {} and group = {}", request.getArtifact(), request.getGroup());
-        List<Artifact> result = artifactArtifactProvider.findByGroupAndArtifact(request.getGroup(), request.getArtifact());
+        List<Artifact> result = artifactService.findByGroupAndArtifact(request.getGroup(), request.getArtifact());
         return convertToDto(result);
     }
     
     @GetMapping(params = "q")
     public List<ArtifactDto> findByQuery(@RequestParam("q") String q) {
         LOG.debug("searching with query = {}", q);
-        List<Artifact> result = artifactArtifactProvider.findByQuery(q);
+        List<Artifact> result = artifactService.findByQuery(q);
         
         return convertToDto(result)
                 .stream()

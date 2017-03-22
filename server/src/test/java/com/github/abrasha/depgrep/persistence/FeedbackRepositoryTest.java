@@ -23,11 +23,15 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     
     @Autowired
     private FeedbackRepository feedbackRepository;
+    
+    @Autowired
+    private FeedbackGenerator feedbackGenerator;
+    
     private Feedback saved;
     
     @Before
     public void init() {
-        saved = feedbackRepository.save(FeedbackGenerator.getValidFeedback());
+        saved = feedbackRepository.save(feedbackGenerator.getValidFeedback());
     }
     
     @Test
@@ -74,7 +78,7 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     public void saveSeveral() throws Exception {
         List<Feedback> feedbacks = IntStream.range(1, 5).mapToObj(num -> {
             Feedback feedback = new Feedback();
-            feedback.setArtifactId("artfact:id" + num);
+            feedback.setArtifactId("artifact:id" + num);
             return feedback;
         }).collect(Collectors.toList());
         
