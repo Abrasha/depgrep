@@ -42,13 +42,13 @@ public class MavenCentralArtifactProviderTest extends AbstractApplicationTest {
     
     @Test
     public void findByGroupNameExists() throws Exception {
-        List<Artifact> artifacts = artifactProvider.findByGroupName(Valid.GROUP);
+        List<Artifact> artifacts = artifactProvider.findByGroup(Valid.GROUP);
         assertThat(artifacts, hasSize(greaterThan(0)));
     }
     
     @Test
     public void findByGroupNameDoesNotExist() throws Exception {
-        List<Artifact> artifacts = artifactProvider.findByGroupName(Invalid.GROUP);
+        List<Artifact> artifacts = artifactProvider.findByGroup(Invalid.GROUP);
         assertThat(artifacts, hasSize(equalTo(0)));
     }
     

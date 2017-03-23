@@ -1,4 +1,6 @@
-package com.github.abrasha.depgrep.service.specification;
+package com.github.abrasha.depgrep.service.specification.impl;
+
+import com.github.abrasha.depgrep.service.specification.ArtifactSpecification;
 
 /**
  * @author Andrii Abramov on 3/12/17.

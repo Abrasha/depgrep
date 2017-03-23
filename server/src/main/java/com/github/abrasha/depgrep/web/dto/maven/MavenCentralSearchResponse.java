@@ -11,11 +11,4 @@ public class MavenCentralSearchResponse {
     private MavenResponseHeader responseHeader;
     private MavenResponse response;
     
-    @Override
-    public String toString() {
-        return "MavenCentralSearchResponse{" +
-                "responseHeader=" + responseHeader +
-                ", response=" + response +
-                '}';
-    }
 }

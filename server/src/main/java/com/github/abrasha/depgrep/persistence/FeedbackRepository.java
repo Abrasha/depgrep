@@ -11,12 +11,10 @@ import java.util.List;
 @Repository
 public interface FeedbackRepository extends EntityRepository<Feedback> {
     
-    List<Feedback> findByArtifactId(String artifactId);
-    
     Feedback findOneByArtifactId(String artifactId);
-    
-    Feedback findOneByArtifactIdAndQuery(String artifactId, String query);
     
     @Override
     List<Feedback> findAll();
+    
+    List<Feedback> findAllByArtifactId(String artifactId);
 }

@@ -1,7 +1,9 @@
 package com.github.abrasha.depgrep.web.dto.maven;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  * @author Andrii Abramov on 3/11/17.
  */
 @Data
+@Getter(AccessLevel.PUBLIC)
 public class MavenResponse {
     
     @JsonProperty("numFound")
@@ -20,12 +23,4 @@ public class MavenResponse {
     @JsonProperty("docs")
     private List<MavenArtifact> artifacts;
     
-    @Override
-    public String toString() {
-        return "MavenResponse{" +
-                "numberFound=" + numberFound +
-                ", offset=" + offset +
-                ", artifacts=" + artifacts +
-                '}';
-    }
 }

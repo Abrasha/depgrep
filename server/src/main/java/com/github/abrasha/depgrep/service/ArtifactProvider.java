@@ -11,10 +11,10 @@ public interface ArtifactProvider<T extends Artifact> {
     
     List<T> findByArtifactName(String artifactName);
     
-    List<T> findByGroupName(String groupName);
-    
-    List<T> findByQuery(String query);
+    List<T> findByGroup(String group);
     
     List<T> findByGroupAndArtifact(String group, String artifact);
+    
+    List<T> findByQuery(String query);
     
 }

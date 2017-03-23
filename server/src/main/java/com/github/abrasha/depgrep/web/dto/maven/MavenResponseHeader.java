@@ -7,7 +7,7 @@ import lombok.Data;
  * @author Andrii Abramov on 3/11/17.
  */
 @Data
-public class MavenResponseHeader {
+class MavenResponseHeader {
     
     private Integer status;
     
@@ -17,12 +17,4 @@ public class MavenResponseHeader {
     @JsonProperty("params")
     private MavenSearchParams mavenSearchParams;
     
-    @Override
-    public String toString() {
-        return "MavenResponseHeader{" +
-                "status=" + status +
-                ", queryTime=" + queryTime +
-                ", mavenSearchParams=" + mavenSearchParams +
-                '}';
-    }
 }

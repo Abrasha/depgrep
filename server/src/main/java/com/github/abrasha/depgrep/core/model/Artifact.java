@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Data
-public class Artifact extends BaseEntity {
+public class Artifact extends BaseEntity implements ArtifactId {
     
     private String group;
     private String artifact;
@@ -20,6 +20,7 @@ public class Artifact extends BaseEntity {
     
     private Integer likes;
     
+    @Override
     public String getArtifactId() {
         return group + ":" + artifact;
     }
