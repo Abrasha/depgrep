@@ -7,6 +7,8 @@ import com.github.abrasha.depgrep.core.model.Feedback;
  */
 public interface FeedbackResolver {
     
-    Feedback getFeedbackForArtifact(String artifactId, String query);
+    Feedback getFeedbackForArtifact(String artifactId);
+    
+    Feedback likeArtifact(String artifactId);
     
 }

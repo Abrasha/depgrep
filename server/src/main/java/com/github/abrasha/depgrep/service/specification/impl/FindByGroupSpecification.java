@@ -1,4 +1,4 @@
-package com.github.abrasha.depgrep.service.specification;
+package com.github.abrasha.depgrep.service.specification.impl;
 
 /**
  * @author Andrii Abramov on 3/11/17.

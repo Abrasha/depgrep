@@ -3,13 +3,12 @@ package com.github.abrasha.depgrep.service.maven;
 import com.github.abrasha.depgrep.AbstractApplicationTest;
 import com.github.abrasha.depgrep.core.model.ArtifactGenerator;
 import com.github.abrasha.depgrep.service.specification.ArtifactSpecification;
-import com.github.abrasha.depgrep.service.specification.FindByArtifactSpecification;
-import com.github.abrasha.depgrep.service.specification.FindByGroupAndArtifactSpecification;
-import com.github.abrasha.depgrep.service.specification.FindByGroupSpecification;
+import com.github.abrasha.depgrep.service.specification.impl.FindByArtifactSpecification;
+import com.github.abrasha.depgrep.service.specification.impl.FindByGroupAndArtifactSpecification;
+import com.github.abrasha.depgrep.service.specification.impl.FindByGroupSpecification;
 import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.RestTemplate;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;

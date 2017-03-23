@@ -3,7 +3,6 @@ package com.github.abrasha.depgrep.core.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,10 +15,7 @@ import javax.persistence.Table;
 @Table(name = "feedbacks")
 public class Feedback extends BaseEntity {
     
-    private String query;
-    private Integer timesApproved;
-    
-    @Column
     private String artifactId;
+    private Integer timesApproved;
     
 }

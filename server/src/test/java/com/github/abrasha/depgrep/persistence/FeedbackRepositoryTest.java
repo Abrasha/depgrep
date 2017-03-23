@@ -76,70 +76,48 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     
     @Test
     public void saveSeveral() throws Exception {
-        List<Feedback> feedbacks = IntStream.range(1, 5).mapToObj(num -> {
-            Feedback feedback = new Feedback();
-            feedback.setArtifactId("artifact:id" + num);
-            return feedback;
-        }).collect(Collectors.toList());
-        
+        int count = 5;
+        List<Feedback> feedbacks = getSomeFeedbacks(count);
         
         feedbackRepository.save(feedbacks);
-        assertThat(feedbackRepository.findAll(), hasSize(5));
+        
+        assertThat(feedbackRepository.findAll(), hasSize(count));
     }
     
     @Test
-    public void findByArtifactIdExists() throws Exception {
-        List<Feedback> feedback = feedbackRepository.findByArtifactId(Valid.ARTIFACT_ID);
+    public void findAllByArtifactIdExists() throws Exception {
+        List<Feedback> feedback = feedbackRepository.findAllByArtifactId(Valid.ARTIFACT_ID);
         assertThat(feedback, is(not(empty())));
     }
     
     @Test
-    public void findByArtifactIdDoesNotExists() throws Exception {
-        List<Feedback> feedback = feedbackRepository.findByArtifactId(Valid.QUERY);
+    public void findAllByArtifactIdDoesNotExists() throws Exception {
+        List<Feedback> feedback = feedbackRepository.findAllByArtifactId(Invalid.ARTIFACT_ID);
         assertThat(feedback, is(empty()));
     }
     
     @Test
-    public void findOneByArtifactId() throws Exception {
-        Feedback feedbacks = feedbackRepository.findOneByArtifactId(Valid.ARTIFACT_ID);
-        assertThat(feedbacks, is(not(nullValue())));
-        assertThat(feedbacks.getId(), is(not(nullValue())));
-        assertThat(feedbacks.getArtifactId(), is(Valid.ARTIFACT_ID));
+    public void findOneByArtifactIdExists() throws Exception {
+        Feedback feedback = feedbackRepository.findOneByArtifactId(Valid.ARTIFACT_ID);
+        assertThat(feedback, is(not(nullValue())));
+        assertThat(feedback.getId(), is(not(nullValue())));
+        assertThat(feedback.getArtifactId(), is(Valid.ARTIFACT_ID));
     }
     
     @Test
     public void findOneByArtifactIdDoesNotExist() throws Exception {
-        Feedback feedbacks = feedbackRepository.findOneByArtifactId(Invalid.ARTIFACT_ID);
-        assertThat(feedbacks, is(nullValue()));
-    }
-    
-    @Test
-    public void findOneByArtifactIdAndQuery() throws Exception {
-        Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(Valid.ARTIFACT_ID, Valid.QUERY);
-        assertThat(feedback, is(not(nullValue())));
-        assertThat(feedback.getId(), is(not(nullValue())));
-        
-        assertThat(feedback.getArtifactId(), is(Valid.ARTIFACT_ID));
-        assertThat(feedback.getQuery(), is(Valid.QUERY));
-        assertThat(feedback.getTimesApproved(), is(Valid.TIMES_APPROVED));
-    }
-    
-    @Test
-    public void findOneByArtifactIdAndQueryNoSuchQuery() throws Exception {
-        Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(Valid.ARTIFACT_ID, Invalid.ARTIFACT_ID);
+        Feedback feedback = feedbackRepository.findOneByArtifactId(Invalid.ARTIFACT_ID);
         assertThat(feedback, is(nullValue()));
     }
     
-    @Test
-    public void findOneByArtifactIdAndQueryNoSuchArtifactId() throws Exception {
-        Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(Invalid.ARTIFACT_ID, Valid.QUERY);
-        assertThat(feedback, is(nullValue()));
-    }
     
-    @Test
-    public void findOneByArtifactIdAndQueryNoSuchArtifact() throws Exception {
-        Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(Invalid.ARTIFACT_ID, Invalid.QUERY);
-        assertThat(feedback, is(nullValue()));
+    
+    private List<Feedback> getSomeFeedbacks(int count) {
+        return IntStream.range(1, count).mapToObj(num -> {
+            Feedback feedback = new Feedback();
+            feedback.setArtifactId("artifact:id" + num);
+            return feedback;
+        }).collect(Collectors.toList());
     }
     
 }

@@ -28,19 +28,4 @@ public class MavenArtifact {
     private List<String> text;
     private List<String> ec;
     
-    @Override
-    public String toString() {
-        return "MavenArtifact{" +
-                "id='" + id + '\'' +
-                ", groupId='" + groupId + '\'' +
-                ", artifactId='" + artifactId + '\'' +
-                ", latestVersion='" + latestVersion + '\'' +
-                ", repositoryId='" + repositoryId + '\'' +
-                ", p='" + p + '\'' +
-                ", timestamp=" + timestamp +
-                ", versionCount=" + versionCount +
-                ", text=" + text +
-                ", ec=" + ec +
-                '}';
-    }
 }

@@ -20,16 +20,37 @@ public class FeedbackResolverImpl implements FeedbackResolver {
     }
     
     @Override
-    public Feedback getFeedbackForArtifact(String artifactId, String query) {
-        Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(artifactId, query);
+    public Feedback getFeedbackForArtifact(String artifactId) {
+        Feedback feedback = feedbackRepository.findOneByArtifactId(artifactId);
         
         if (feedback == null) {
             feedback = new Feedback();
             feedback.setArtifactId(artifactId);
             feedback.setTimesApproved(0);
-            feedback.setQuery(query);
+            feedback = feedbackRepository.save(feedback);
         }
+        
+        return feedback;
+    }
+    
+    @Override
+    public Feedback likeArtifact(String artifactId) {
+        Feedback feedback = feedbackRepository.findOneByArtifactId(artifactId);
+        
+        if (feedback == null) {
+            feedback = createDefaultFeedback(artifactId);
+        }
+        
+        feedback.setTimesApproved(feedback.getTimesApproved() + 1);
         
         return feedbackRepository.save(feedback);
     }
+    
+    private Feedback createDefaultFeedback(String artifactId) {
+        Feedback feedback = new Feedback();
+        feedback.setTimesApproved(0);
+        feedback.setArtifactId(artifactId);
+        return feedback;
+    }
+    
 }

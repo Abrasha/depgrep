@@ -29,26 +29,4 @@ public class FeedbackServiceImpl implements FeedbackService {
         return feedbackRepository.save(feedback);
     }
     
-    @Override
-    public Feedback approveQuery(String query, String artifactId) {
-        Feedback feedback = feedbackRepository.findOneByArtifactIdAndQuery(artifactId, query);
-        
-        if (feedback == null) {
-            feedback = createNewFeedback(query, artifactId);
-        }
-        
-        feedback.setTimesApproved(feedback.getTimesApproved() + 1);
-        save(feedback);
-        
-        return feedback;
-    }
-    
-    private Feedback createNewFeedback(String query, String artifactId) {
-        Feedback feedback = new Feedback();
-        feedback.setTimesApproved(0);
-        feedback.setQuery(query);
-        feedback.setArtifactId(artifactId);
-        return feedback;
-    }
-    
 }

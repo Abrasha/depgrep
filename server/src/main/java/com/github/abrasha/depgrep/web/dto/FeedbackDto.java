@@ -8,8 +8,7 @@ import lombok.Data;
 @Data
 public class FeedbackDto {
     
-    private String query;
-    private Integer timesApproved;
     private String artifactId;
+    private Integer timesApproved;
     
 }

@@ -4,7 +4,11 @@ import com.github.abrasha.depgrep.core.model.Artifact;
 import com.github.abrasha.depgrep.core.model.Feedback;
 import com.github.abrasha.depgrep.service.ArtifactProvider;
 import com.github.abrasha.depgrep.service.FeedbackResolver;
-import com.github.abrasha.depgrep.service.specification.*;
+import com.github.abrasha.depgrep.service.specification.ArtifactSpecification;
+import com.github.abrasha.depgrep.service.specification.impl.FindByArtifactSpecification;
+import com.github.abrasha.depgrep.service.specification.impl.FindByGroupAndArtifactSpecification;
+import com.github.abrasha.depgrep.service.specification.impl.FindByGroupSpecification;
+import com.github.abrasha.depgrep.service.specification.impl.FindByQuerySpecification;
 import com.github.abrasha.depgrep.web.dto.maven.MavenArtifact;
 import com.github.abrasha.depgrep.web.dto.maven.MavenCentralSearchResponse;
 import org.slf4j.Logger;
@@ -39,8 +43,8 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     }
     
     @Override
-    public List<Artifact> findByGroupName(String groupName) {
-        return executeRequest(new FindByGroupSpecification(groupName));
+    public List<Artifact> findByGroup(String group) {
+        return executeRequest(new FindByGroupSpecification(group));
     }
     
     @Override
@@ -56,25 +60,28 @@ public class MavenCentralArtifactProvider implements ArtifactProvider<Artifact> 
     private List<Artifact> executeRequest(ArtifactSpecification specification) {
         MavenCentralSearchResponse response = mavenCentral.query(specification);
         
+        return extractArtifacts(response);
+    }
+    
+    private List<Artifact> extractArtifacts(MavenCentralSearchResponse response) {
         return response.getResponse().getArtifacts()
                 .stream()
-                .map(artifact -> parseResponse(artifact, specification.getQuery()))
+                .map(this::parseArtifact)
                 .collect(Collectors.toList());
     }
     
-    private Artifact parseResponse(MavenArtifact mavenArtifact, String query) {
+    private Artifact parseArtifact(MavenArtifact mavenArtifact) {
         Artifact artifact = new Artifact();
         artifact.setArtifact(mavenArtifact.getArtifactId());
         artifact.setGroup(mavenArtifact.getGroupId());
         artifact.setVersion(mavenArtifact.getLatestVersion());
         
         String artifactId = artifact.getArtifactId();
-        Feedback feedback = feedbackResolver.getFeedbackForArtifact(artifactId, query);
+        Feedback feedback = feedbackResolver.getFeedbackForArtifact(artifactId);
         
         LOG.debug("found feedback for artifact id = {}: {}", feedback);
         
         artifact.setLikes(feedback.getTimesApproved());
-        
         
         return artifact;
     }
