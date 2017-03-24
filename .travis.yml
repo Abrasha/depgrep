@@ -3,3 +3,4 @@ jdk:
   - oraclejdk8
 
 before_script: cd server
+after_success: ./gradlew check jacocoTestReport coveralls
