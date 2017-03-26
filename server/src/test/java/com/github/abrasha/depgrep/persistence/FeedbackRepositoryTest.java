@@ -31,6 +31,7 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     
     @Before
     public void init() {
+        feedbackRepository.deleteAll();
         saved = feedbackRepository.save(feedbackGenerator.getValidFeedback());
     }
     

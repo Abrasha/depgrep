@@ -11,7 +11,7 @@ server/out
 .Trash-*
 .nfs*
 *.class
-*.log
+*.log*
 *.ctxt
 .mtj.tmp/
 .idea/
