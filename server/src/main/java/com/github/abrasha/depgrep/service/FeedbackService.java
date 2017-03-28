@@ -7,8 +7,9 @@ import com.github.abrasha.depgrep.core.model.Feedback;
  */
 public interface FeedbackService {
     
-    Feedback findByArtifactId(String artifactId);
+    Feedback findOneByArtifactId(String artifactId);
     
     Feedback save(Feedback feedback);
     
+    void deleteAll();
 }

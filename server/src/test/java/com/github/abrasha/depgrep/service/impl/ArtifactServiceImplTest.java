@@ -2,32 +2,30 @@ package com.github.abrasha.depgrep.service.impl;
 
 import com.github.abrasha.depgrep.AbstractApplicationTest;
 import com.github.abrasha.depgrep.core.model.Artifact;
+import com.github.abrasha.depgrep.core.model.ArtifactGenerator.Valid;
 import com.github.abrasha.depgrep.core.model.Feedback;
 import com.github.abrasha.depgrep.service.ArtifactProvider;
 import com.github.abrasha.depgrep.service.ArtifactService;
 import com.github.abrasha.depgrep.service.FeedbackResolver;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
 import static java.util.Collections.singletonList;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Andrii Abramov on 3/24/17.
  */
 public class ArtifactServiceImplTest extends AbstractApplicationTest {
 
-    private static final String GROUP_NAME = "com.google.inject";
-    private static final String ARTIFACT_NAME = "guice";
+    private static final String GROUP_NAME = Valid.GROUP;
+    private static final String ARTIFACT_NAME = Valid.ARTIFACT_ID;
     private static final String QUERY = "query";
     private static final Integer TIMES_APPROVED = 1;
 
