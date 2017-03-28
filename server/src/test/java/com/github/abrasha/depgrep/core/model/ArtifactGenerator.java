@@ -11,11 +11,13 @@ public class ArtifactGenerator {
     public static class Valid {
         public static final String ARTIFACT_NAME = "guice";
         public static final String GROUP = "com.google.inject";
+        public static final String ARTIFACT_ID = GROUP + ":" + ARTIFACT_NAME;
     }
     
     public static class Invalid {
         public static final String ARTIFACT_NAME = "i.am.invalid.artifact";
         public static final String GROUP = "i.am.invalid.group";
+        public static final String ARTIFACT_ID = GROUP + ":" + ARTIFACT_NAME;
     }
     
     public Artifact getValidArtifact() {

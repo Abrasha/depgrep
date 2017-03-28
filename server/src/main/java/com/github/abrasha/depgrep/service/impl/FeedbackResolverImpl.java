@@ -1,8 +1,8 @@
 package com.github.abrasha.depgrep.service.impl;
 
 import com.github.abrasha.depgrep.core.model.Feedback;
-import com.github.abrasha.depgrep.persistence.FeedbackRepository;
 import com.github.abrasha.depgrep.service.FeedbackResolver;
+import com.github.abrasha.depgrep.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class FeedbackResolverImpl implements FeedbackResolver {
     
-    private final FeedbackRepository feedbackRepository;
+    private final FeedbackService feedbackRepository;
     
     @Autowired
-    public FeedbackResolverImpl(FeedbackRepository feedbackRepository) {
+    public FeedbackResolverImpl(FeedbackService feedbackRepository) {
         this.feedbackRepository = feedbackRepository;
     }
     
@@ -24,10 +24,7 @@ public class FeedbackResolverImpl implements FeedbackResolver {
         Feedback feedback = feedbackRepository.findOneByArtifactId(artifactId);
         
         if (feedback == null) {
-            feedback = new Feedback();
-            feedback.setArtifactId(artifactId);
-            feedback.setTimesApproved(0);
-            feedback = feedbackRepository.save(feedback);
+            feedback = feedbackRepository.save(createDefaultFeedback(artifactId));
         }
         
         return feedback;
@@ -35,11 +32,7 @@ public class FeedbackResolverImpl implements FeedbackResolver {
     
     @Override
     public Feedback likeArtifact(String artifactId) {
-        Feedback feedback = feedbackRepository.findOneByArtifactId(artifactId);
-        
-        if (feedback == null) {
-            feedback = createDefaultFeedback(artifactId);
-        }
+        Feedback feedback = getFeedbackForArtifact(artifactId);
         
         feedback.setTimesApproved(feedback.getTimesApproved() + 1);
         
@@ -48,8 +41,8 @@ public class FeedbackResolverImpl implements FeedbackResolver {
     
     private Feedback createDefaultFeedback(String artifactId) {
         Feedback feedback = new Feedback();
-        feedback.setTimesApproved(0);
         feedback.setArtifactId(artifactId);
+        feedback.setTimesApproved(0);
         return feedback;
     }
     

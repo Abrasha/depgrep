@@ -20,13 +20,18 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
     
     @Override
-    public Feedback findByArtifactId(String artifactId) {
+    public Feedback findOneByArtifactId(String artifactId) {
         return feedbackRepository.findOneByArtifactId(artifactId);
     }
     
     @Override
     public Feedback save(Feedback feedback) {
         return feedbackRepository.save(feedback);
+    }
+    
+    @Override
+    public void deleteAll() {
+        feedbackRepository.deleteAll();
     }
     
 }
