@@ -3,21 +3,22 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
-import {AppComponent} from './app.component';
-import {CustomComponent} from './custom.component';
+import {AppComponent} from './app/app.component';
+import {ArtifactsComponent} from './artifacts.component';
+import {ArtifactService} from './artifact.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CustomComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ArtifactsComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule
+    ],
+    providers: [ArtifactService],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
