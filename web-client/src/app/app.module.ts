@@ -6,11 +6,15 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app/app.component';
 import {ArtifactsComponent} from './artifacts.component';
 import {ArtifactService} from './artifact.service';
+import {ArtifactListComponent} from './artifact-list/artifact-list.component';
+import {SearchboxComponent} from './searchbox/searchbox.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        ArtifactsComponent
+        ArtifactsComponent,
+        ArtifactListComponent,
+        SearchboxComponent
     ],
     imports: [
         BrowserModule,
