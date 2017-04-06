@@ -10,11 +10,12 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * @author Andrii Abramov on 3/21/17.
@@ -43,15 +44,15 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     
     @Test
     public void findOneExists() throws Exception {
-        Feedback feedback = feedbackRepository.findOne(saved.getId());
-        assertThat(feedback, is(not(nullValue())));
-        assertThat(feedback.getId(), is(not(nullValue())));
+        Optional<Feedback> feedback = feedbackRepository.findOne(saved.getId());
+        assertTrue(feedback.isPresent());
+        assertThat(feedback.get().getId(), is(not(nullValue())));
     }
     
     @Test
     public void findOneDoesNotExist() throws Exception {
-        Feedback feedback = feedbackRepository.findOne(0L);
-        assertThat(feedback, is(nullValue()));
+        Optional<Feedback> feedback = feedbackRepository.findOne(0L);
+        assertFalse(feedback.isPresent());
     }
     
     @Test
@@ -110,7 +111,6 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
         Feedback feedback = feedbackRepository.findOneByArtifactId(Invalid.ARTIFACT_ID);
         assertThat(feedback, is(nullValue()));
     }
-    
     
     
     private List<Feedback> getSomeFeedbacks(int count) {
