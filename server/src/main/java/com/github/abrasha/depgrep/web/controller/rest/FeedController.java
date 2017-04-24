@@ -1,7 +1,6 @@
 package com.github.abrasha.depgrep.web.controller.rest;
 
 import com.github.abrasha.depgrep.core.model.Feedback;
-import com.github.abrasha.depgrep.service.FeedbackResolver;
 import com.github.abrasha.depgrep.service.FeedbackService;
 import com.github.abrasha.depgrep.web.dto.FeedbackDto;
 import org.slf4j.Logger;
@@ -23,7 +22,7 @@ public class FeedController extends AbstractRestController<Feedback, FeedbackDto
     private final FeedbackService feedbackService;
     
     @Autowired
-    public FeedController(FeedbackResolver feedbackResolver, FeedbackService feedbackService) {
+    public FeedController(FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
     }
     
