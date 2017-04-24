@@ -33,21 +33,27 @@ public class SearchController extends AbstractRestController<Artifact, ArtifactD
     public List<ArtifactDto> findByGroup(@RequestParam("group") String group) {
         LOG.debug("searching with group = {}", group);
         List<Artifact> result = artifactService.findByGroupName(group);
-        return convertToDto(result);
+        List<ArtifactDto> response = convertToDto(result);
+        response.sort(Comparator.comparing(ArtifactDto::getLikes).reversed());
+        return response;
     }
     
     @GetMapping(params = "artifact")
     public List<ArtifactDto> findByArtifact(@RequestParam("artifact") String artifact) {
         LOG.debug("searching with artifact = {}", artifact);
         List<Artifact> result = artifactService.findByArtifactName(artifact);
-        return convertToDto(result);
+        List<ArtifactDto> response = convertToDto(result);
+        response.sort(Comparator.comparing(ArtifactDto::getLikes).reversed());
+        return response;
     }
     
     @GetMapping(params = {"artifact", "group"})
     public List<ArtifactDto> findByArtifactAndGroup(@ModelAttribute SearchRequest request) {
         LOG.debug("searching with artifact = {} and group = {}", request.getArtifact(), request.getGroup());
         List<Artifact> result = artifactService.findByGroupAndArtifact(request.getGroup(), request.getArtifact());
-        return convertToDto(result);
+        List<ArtifactDto> response = convertToDto(result);
+        response.sort(Comparator.comparing(ArtifactDto::getLikes).reversed());
+        return response;
     }
     
     @GetMapping(params = "q")
@@ -57,7 +63,7 @@ public class SearchController extends AbstractRestController<Artifact, ArtifactD
         
         return convertToDto(result)
                 .stream()
-                .sorted(Comparator.comparingInt(ArtifactDto::getLikes))
+                .sorted(Comparator.comparingInt(ArtifactDto::getLikes).reversed())
                 .collect(Collectors.toList());
     }
     

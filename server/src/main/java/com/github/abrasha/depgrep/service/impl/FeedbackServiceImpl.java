@@ -6,6 +6,8 @@ import com.github.abrasha.depgrep.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Andrii Abramov on 3/20/17.
  */
@@ -27,6 +29,11 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public Feedback save(Feedback feedback) {
         return feedbackRepository.save(feedback);
+    }
+    
+    @Override
+    public List<Feedback> getTopUsedArtifacts() {
+        return feedbackRepository.findTop5ByOrderByTimesApprovedDesc();
     }
     
     @Override
