@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/publish';
+import {Artifact} from './model/artifact';
 
 @Injectable()
 export class ArtifactService {
@@ -45,6 +46,11 @@ export class ArtifactService {
 
     getArtifacts() {
         return this.http.get('http://localhost:8080/search?q=guice')
+            .map(ArtifactService.parseData);
+    }
+
+    approveArtifact(artifact: Artifact) {
+        return this.http.post(`http://localhost:8080/approve/${artifact.group}:${artifact.artifact}`, {})
             .map(ArtifactService.parseData);
     }
 

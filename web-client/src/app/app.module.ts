@@ -10,6 +10,7 @@ import {ArtifactListComponent} from './artifact-list/artifact-list.component';
 import {SearchboxComponent} from './searchbox/searchbox.component';
 import {PopularComponent} from './popular/popular.component';
 import {SelectedArtifactComponent} from './selected-artifact/app-selected-artifact';
+import {CopyDependencyComponent} from './copy-dependency/copy-dependency.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import {SelectedArtifactComponent} from './selected-artifact/app-selected-artifa
         ArtifactListComponent,
         SearchboxComponent,
         PopularComponent,
-        SelectedArtifactComponent
+        SelectedArtifactComponent,
+        CopyDependencyComponent
     ],
     imports: [
         BrowserModule,

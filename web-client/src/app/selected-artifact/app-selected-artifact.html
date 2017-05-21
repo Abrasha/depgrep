@@ -16,10 +16,10 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr *ngFor="let a of _artifacts">
-			<td>{{a.group}}</td>
-			<td>{{a.artifact}}</td>
-			<td>{{a.version}}</td>
+		<tr>
+			<td>{{selectedArtifact.group}}</td>
+			<td>{{selectedArtifact.artifact}}</td>
+			<td>{{selectedArtifact.version}}</td>
 			<td>
 				<span class="btn btn-default btn-hover-gray">Maven</span>
 				<span class="btn btn-default btn-hover-gray">Gradle</span>
@@ -28,10 +28,4 @@
 		</tr>
 		</tbody>
 	</table>
-	<hr>
-	<!-- Selected artifact -->
-	<div>
-		<app-selected-artifact *ngIf="currentSelectedArtifact"
-		                       [selectedArtifact]="currentSelectedArtifact"></app-selected-artifact>
-	</div>
 </div>

@@ -2,9 +2,10 @@
 	<table class="table table-bordered table-hover">
 		<colgroup>
 			<col class="col-md-3">
-			<col class="col-md-3">
 			<col class="col-md-1">
-			<col class="col-md-5">
+			<col class="col-md-1">
+			<col class="col-md-6">
+			<col class="col-md-1">
 			<col>
 		</colgroup>
 		<thead>
@@ -13,25 +14,33 @@
 			<th>Name</th>
 			<th>Version</th>
 			<th>Export as...</th>
+			<th>Approve</th>
 		</tr>
 		</thead>
 		<tbody>
-		<tr *ngFor="let a of artifacts" (click)="selectedArtifact(a)">
+		<tr *ngFor="let a of artifacts" (click)="selectArtifact(a)">
 			<td>{{a.group}}</td>
 			<td>{{a.artifact}}</td>
 			<td>{{a.version}}</td>
 			<td>
-				<span class="btn btn-default btn-hover-gray">Maven</span>
-				<span class="btn btn-default btn-hover-gray">Gradle</span>
-				<span class="btn btn-default btn-hover-gray">Ant</span>
+				<div class="btn-group-justified">
+				<span class="btn btn-default btn-hover-gray" (click)="doExport(a, 'maven')">Maven</span>
+				<span class="btn btn-default btn-hover-gray" (click)="doExport(a, 'gradle')">Gradle</span>
+				<span class="btn btn-default btn-hover-gray" (click)="doExport(a, 'ivy')">Ivy</span>
+				</div>
+				<app-copy-dependency [artifact]="a" [exportType]="exportType" *ngIf="a.shouldShow">
+				</app-copy-dependency>
+			</td>
+			<td>
+				<span *ngIf="!a.approved" class="btn btn-success" (click)="doApprove(a)">Approve</span>
 			</td>
 		</tr>
 		</tbody>
 	</table>
 	<hr>
 	<!-- Selected artifact -->
-	<div>
-		<app-selected-artifact *ngIf="currentSelectedArtifact"
-		                       [selectedArtifact]="currentSelectedArtifact"></app-selected-artifact>
-	</div>
+	<!--<div>-->
+		<!--<app-selected-artifact *ngIf="currentSelectedArtifact"-->
+		                       <!--[selectedArtifact]="currentSelectedArtifact"></app-selected-artifact>-->
+	<!--</div>-->
 </div>
