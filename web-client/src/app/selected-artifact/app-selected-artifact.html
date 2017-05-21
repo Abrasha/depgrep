@@ -16,7 +16,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr *ngFor="let a of artifacts" (click)="selectedArtifact(a)">
+		<tr *ngFor="let a of _artifacts">
 			<td>{{a.group}}</td>
 			<td>{{a.artifact}}</td>
 			<td>{{a.version}}</td>

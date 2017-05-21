@@ -43,21 +43,21 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     }
     
     @Test
-    public void findOneExists() throws Exception {
-        Optional<Feedback> feedback = feedbackRepository.findOne(saved.getId());
+    public void findByIdExists() throws Exception {
+        Optional<Feedback> feedback = feedbackRepository.findById(saved.getId());
         assertTrue(feedback.isPresent());
         assertThat(feedback.get().getId(), is(not(nullValue())));
     }
     
     @Test
-    public void findOneDoesNotExist() throws Exception {
-        Optional<Feedback> feedback = feedbackRepository.findOne(0L);
+    public void findByIdDoesNotExist() throws Exception {
+        Optional<Feedback> feedback = feedbackRepository.findById(0L);
         assertFalse(feedback.isPresent());
     }
     
     @Test
     public void deleteOne() throws Exception {
-        feedbackRepository.delete(saved.getId());
+        feedbackRepository.deleteById(saved.getId());
         assertThat(feedbackRepository.findAll(), is(empty()));
         
     }
@@ -81,7 +81,7 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
         int count = 5;
         List<Feedback> feedbacks = getSomeFeedbacks(count);
         
-        feedbackRepository.save(feedbacks);
+        feedbackRepository.saveAll(feedbacks);
         
         assertThat(feedbackRepository.findAll(), hasSize(count));
     }
@@ -99,7 +99,7 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     }
     
     @Test
-    public void findOneByArtifactIdExists() throws Exception {
+    public void findByIdByArtifactIdExists() throws Exception {
         Feedback feedback = feedbackRepository.findOneByArtifactId(Valid.ARTIFACT_ID);
         assertThat(feedback, is(not(nullValue())));
         assertThat(feedback.getId(), is(not(nullValue())));
@@ -107,7 +107,7 @@ public class FeedbackRepositoryTest extends AbstractRepositoryTest {
     }
     
     @Test
-    public void findOneByArtifactIdDoesNotExist() throws Exception {
+    public void findByIdByArtifactIdDoesNotExist() throws Exception {
         Feedback feedback = feedbackRepository.findOneByArtifactId(Invalid.ARTIFACT_ID);
         assertThat(feedback, is(nullValue()));
     }

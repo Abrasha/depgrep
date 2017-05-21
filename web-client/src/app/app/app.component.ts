@@ -3,9 +3,15 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'app-root',
-    template: `<h2>{{title}}</h2>
-        <app-searchbox></app-searchbox>
-    `
+    styles: [`
+        .page-background {
+            background-color: #eee;
+        }
+        .container {
+            background-color: white;
+        }
+    `],
+    templateUrl: 'app.component.html'
 })
 export class AppComponent {
     title = 'MavenPlease';

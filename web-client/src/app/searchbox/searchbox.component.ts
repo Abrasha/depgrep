@@ -5,22 +5,7 @@ import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-searchbox',
-    template: `
-			<div>
-				Artifact search:
-				<br>
-				<input [(ngModel)]="query" placeholder="query"/>
-				<button (click)="findByQuery()">GO</button>
-				<br>
-				<input [(ngModel)]="artifact" placeholder="artifact"/>
-				<button (click)="findByArtifact()">GO</button>
-				<br>
-				<input [(ngModel)]="group" placeholder="group"/>
-				<button (click)="findByGroup()">GO</button>
-				<br>
-			</div>
-			<app-artifact-list [artifacts]="this.searchResults"></app-artifact-list>
-    `,
+    templateUrl: 'searchbox.component.html',
     styleUrls: ['./searchbox.component.css']
 })
 export class SearchboxComponent implements OnInit {

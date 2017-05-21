@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/publish';
-import {log} from 'util';
-
 
 @Injectable()
 export class ArtifactService {
@@ -33,6 +31,11 @@ export class ArtifactService {
     findByQuery(query: string) {
         console.log('searching by query');
         return this.performQuery(`http://localhost:8080/search?q=${query}`);
+    }
+
+    findPopularArtifacts() {
+        console.log('requesting popular artifacts');
+        return this.performQuery(`http://localhost:8080/artifacts/popular`);
     }
 
     private performQuery(url: string) {
