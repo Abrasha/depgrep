@@ -25,7 +25,7 @@ export class CopyDependencyComponent implements OnInit, OnChanges {
   <version>${this.artifact.version}</version>
 </dependency>`;
         } else if (this.exportType === 'gradle') {
-            this.artifactString = `compile ${this.artifact.group}:${this.artifact.artifact}:${this.artifact.version}`;
+            this.artifactString = `compile '${this.artifact.group}:${this.artifact.artifact}:${this.artifact.version}'`;
         } else if (this.exportType === 'ivy') {
             this.artifactString = `<dependency org="${this.artifact.group}" name="${this.artifact.artifact}" rev="${this.artifact.version}"`;
         }

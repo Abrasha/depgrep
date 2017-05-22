@@ -1,6 +1,7 @@
 .popular-block {
     border: gray dashed 2px;
     border-radius: 5px;
+    margin-bottom: 50px;
 }
 
 .popular-content {

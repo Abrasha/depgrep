@@ -1,6 +1,9 @@
-.query-block {
-    padding: 5px;
+.btn-submit-request {
+    margin-top: 10px;
+}
 
-    border: #54e70b solid 1px;
+.search-box {
+    padding: 25px;
     border-radius: 5px;
+    border: 3px outset;
 }

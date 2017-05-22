@@ -1,8 +1,12 @@
 <div class="popular-block">
 	<div class="popular-content">
 		<h2>Popular artifacts</h2>
-		<ul>
-			<li *ngFor="let a of popularArtifacts">{{a.artifactId}}</li>
+		<ul class="list-group">
+			<li class="list-group-item justify-content-between" *ngFor="let a of popularArtifacts">
+				{{a.artifactId}}
+				<span class="badge badge-default badge-pill">{{a.timesApproved}}</span>
+			</li>
 		</ul>
+
 	</div>
 </div>

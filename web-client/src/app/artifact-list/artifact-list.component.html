@@ -23,24 +23,25 @@
 			<td>{{a.artifact}}</td>
 			<td>{{a.version}}</td>
 			<td>
-				<div class="btn-group-justified">
-				<span class="btn btn-default btn-hover-gray" (click)="doExport(a, 'maven')">Maven</span>
-				<span class="btn btn-default btn-hover-gray" (click)="doExport(a, 'gradle')">Gradle</span>
-				<span class="btn btn-default btn-hover-gray" (click)="doExport(a, 'ivy')">Ivy</span>
+				<div class="btn-group btn-group-justified">
+					<div class="btn btn-default btn-hover-gray" (click)="doExport(a, 'maven')"
+					     [ngClass]="{'btn-warning' : exportType === 'maven' && a.shouldShow}">Maven
+					</div>
+					<div class="btn btn-default btn-hover-gray" (click)="doExport(a, 'gradle')"
+					     [ngClass]="{'btn-warning' : exportType === 'gradle' && a.shouldShow}">Gradle</div>
+					<div class="btn btn-default btn-hover-gray" (click)="doExport(a, 'ivy')"
+					     [ngClass]="{'btn-warning' : exportType === 'ivy' && a.shouldShow}">Ivy</div>
 				</div>
 				<app-copy-dependency [artifact]="a" [exportType]="exportType" *ngIf="a.shouldShow">
 				</app-copy-dependency>
 			</td>
 			<td>
 				<span *ngIf="!a.approved" class="btn btn-success" (click)="doApprove(a)">Approve</span>
+				<img class="center-block" height="32px"
+				     src="https://cdn1.iconfinder.com/data/icons/basic-ui-icon-rounded-colored/512/icon-01-128.png"
+				     *ngIf="a.approved">
 			</td>
 		</tr>
 		</tbody>
 	</table>
-	<hr>
-	<!-- Selected artifact -->
-	<!--<div>-->
-		<!--<app-selected-artifact *ngIf="currentSelectedArtifact"-->
-		                       <!--[selectedArtifact]="currentSelectedArtifact"></app-selected-artifact>-->
-	<!--</div>-->
 </div>
